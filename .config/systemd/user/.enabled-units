@@ -1,0 +1,14 @@
+dbus-broker.service
+gnome-keyring-daemon.service
+gnome-keyring-daemon.socket
+nextcloud-inotifyscan.service
+openrazer-daemon.service
+p11-kit-server.socket
+pipewire-pulse.service
+pipewire-pulse.socket
+pipewire.service
+pipewire.socket
+shairport-sync.service
+wireplumber.service
+xdg-user-dirs.service
+ydotool.service

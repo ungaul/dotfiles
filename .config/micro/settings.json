@@ -1,0 +1,10 @@
+{
+    "clipboard": "terminal",
+    "colorscheme": "simple",
+    "diffgutter": true,
+    "scrollbar": true,
+    "scrollbarchar": " ",
+    "mkparents": true,
+    "scrollmargin": 2,
+	"incsearch": true
+}

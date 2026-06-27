@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Fall Guys
+Comment=Play this game on Steam
+Exec=steam steam://rungameid/1097150
+Icon=steam_icon_1097150
+Terminal=false
+Type=Application
+Categories=Game;
