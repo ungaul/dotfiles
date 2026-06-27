@@ -1,0 +1,4 @@
+DOTFILES_DIR=/home/gaulerie/.local/share/athome/dotfiles
+DOTFILES_REPO_URL=https://github.com/ungaul/dotfiles
+GITHUB_USER=ungaul
+REMOVE_UNLISTED=1
