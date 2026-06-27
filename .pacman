@@ -30,6 +30,7 @@ clipcat
 cliphist
 cmake
 cmatrix-git
+cmatrix-git-debug
 cronie
 darkly-bin
 davfs2
@@ -63,7 +64,6 @@ fzf
 ghostty
 gifsicle
 git
-github-cli
 github-desktop-bin
 gnome-disk-utility
 gnome-keyring
