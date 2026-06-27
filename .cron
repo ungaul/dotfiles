@@ -11,5 +11,5 @@
 0 3 * * * crontab -l > "$HOME/.cron" # Cron
 0 3 * * * docker inspect -f '{{.State.Running}}' nextcloud-app 2>/dev/null | grep -q true && for uri in $(docker exec -i nextcloud-app php /app/www/public/occ dav:list-calendars gaulerie | tail -n +4 | head -n -1 | awk '{print $2}'); do docker exec -i nextcloud-app php /app/www/public/occ calendar:export gaulerie "$uri" > ~/Files/Others/Archive/Backup/Calendars/"${uri}".ics; done # Export Calendars
 0 3 * * * docker inspect -f '{{.State.Running}}' nextcloud-app 2>/dev/null | grep -q true && docker exec -i nextcloud-app php /app/www/public/occ music:playlist-export gaulerie --all-lists --overwrite --dir=Music/Playlists # Export Playlists
-0 3 * * * cd /home/gaulerie/Documents/GitHub/dotfiles && ./sync.sh && (git add -A; git diff --cached --quiet || git commit -m "sync: $(date -Iseconds)"; git push origin main) >> .sync.log 2>&1 # Dotfiles sync + push
+0 3 * * * athome
 0 4 * * * export RESTIC_PASSWORD=1488 RESTIC_REPOSITORY="sftp:nat:/mnt/seagate/snapshots/$(cat /etc/hostname)"; restic snapshots &>/dev/null || restic init; restic backup --ignore-inode /srv /mnt/t7/nextcloud; restic forget --keep-last 365 --prune # Restic backup
