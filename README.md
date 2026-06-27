@@ -10,8 +10,4 @@ Files are mirrored at their `$HOME`-relative paths so they're easy to browse. Mo
 
 ## Install
 
-Use [ungaul/athome](https://github.com/ungaul/athome) to bootstrap a machine from these dotfiles:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/ungaul/athome/main/install.sh | bash
-```
+Use [ungaul/athome](https://github.com/ungaul/athome) to install them if needed.
