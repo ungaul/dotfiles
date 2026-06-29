@@ -1,0 +1,12 @@
+[Unit]
+Description=Mount iPhone with ifuse
+After=usbmuxd.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/ifuse /mnt/iphone
+ExecStop=/usr/bin/fusermount3 -u /mnt/iphone
+RemainAfterExit=yes
+
+[Install]
+WantedBy=default.target
