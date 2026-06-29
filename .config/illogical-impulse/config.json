@@ -313,7 +313,7 @@
         "timeout": 1000
     },
     "osk": {
-        "layout": "French",
+        "layout": "English",
         "pinnedOnStartup": false
     },
     "overlay": {
