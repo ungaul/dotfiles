@@ -1,4 +1,5 @@
 theme = matugen
+working-directory = home
 font-family = JetBrains Mono Nerd Font
 font-size = 11
 window-padding-x = 22

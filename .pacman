@@ -97,6 +97,7 @@ i3-wm
 i3blocks
 i3status
 icoutils
+ifuse
 inotify-tools
 intel-media-driver
 intel-ucode
@@ -128,6 +129,7 @@ micro
 minecraft-launcher
 mpc
 mpd-mpris
+mtpfs
 nano
 nautilus
 nautilus-open-any-terminal
@@ -235,6 +237,7 @@ tumbler
 udis86-git
 uhubctl
 unzip
+usbmuxd
 uv
 ventoy-bin
 visual-studio-code-bin
