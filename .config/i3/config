@@ -10,6 +10,7 @@ exec --no-startup-id pipewire
 exec --no-startup-id /usr/lib/xdg-desktop-portal &
 exec --no-startup-id /usr/lib/xdg-desktop-portal-gtk &
 exec --no-startup-id dunst &
+exec --no-startup-id ~/.config/eww/scripts/notif-logger.sh
 exec --no-startup-id setxkbmap fr
 exec --no-startup-id greenclip daemon
 exec --no-startup-id xrdb ~/.Xresources
@@ -17,11 +18,13 @@ exec --no-startup-id sleep 4 && autotiling
 exec --no-startup-id localsend --hidden
 exec --no-startup-id alttab -bg "#1a1d15" -fg "#d6d0bd" -frame "#c9b98f" -inact "#2f3327" -t 150x100 -d 1
 # exec --no-startup-id discord --start-minimized
-exec_always --no-startup-id pkill polybar; sleep 1 && for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do MONITOR=$m polybar main & done
+exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 font pango:monospace 10
 floating_modifier $mod
 tiling_drag modifier titlebar
+focus_follows_mouse yes
+mouse_warping output
 
 bindsym $mod+Shift+s exec maim -s | xclip -selection clipboard -t image/png
 bindsym $mod+t exec alacritty
@@ -30,16 +33,29 @@ bindsym $mod+l exec ~/.config/i3/powermenu.sh
 bindsym Control+Mod1+Delete exec ~/.config/i3/powermenu.sh
 bindsym Control+Shift+Escape exec plasma-systemmonitor
 bindsym $mod+e exec nautilus
-bindsym $mod+n exec alacritty -e  micro
 bindsym $mod+v exec rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
 bindsym $mod+Left focus left
 bindsym $mod+Right focus right
-bindsym $mod+Shift+Left move container to workspace prev; workspace prev
-bindsym $mod+Shift+Right move container to workspace next; workspace next
+bindsym $mod+Shift+Left exec --no-startup-id ~/.config/i3/ws-nav.sh move prev
+bindsym $mod+Shift+Right exec --no-startup-id ~/.config/i3/ws-nav.sh move next
+
+# Scroll to switch/move workspaces, wrapping within the fixed 5 workspaces
+bindsym $mod+button4 exec --no-startup-id ~/.config/i3/ws-nav.sh switch prev
+bindsym $mod+button5 exec --no-startup-id ~/.config/i3/ws-nav.sh switch next
+bindsym $mod+Shift+button4 exec --no-startup-id ~/.config/i3/ws-nav.sh move prev
+bindsym $mod+Shift+button5 exec --no-startup-id ~/.config/i3/ws-nav.sh move next
 # bindsym .$mod+d exec --no-startup-id rofi -show drun
 
 # exec --no-startup-id i3-msg "i3-msg "workspace 2; exec alacritty --title ws-placeholder" && i3-msg "workspace 3; exec alacritty --title ws-placeholder" && i3-msg "workspace 4; exec alacritty --title ws-placeholder" && i3-msg "workspace 5; exec alacritty --title ws-placeholder" && i3-msg "workspace 1"
 for_window [title="ws-placeholder"] floating enable
+
+# Claude Code quick-access floating panel, pinned to the left edge
+for_window [instance="claude-menu"] floating enable, sticky enable, border pixel 0, resize set 300 px 770 px, move position 0 0, move scratchpad, scratchpad show
+bindsym $mod+b exec --no-startup-id ~/.config/i3/claude-menu.sh
+
+# eww control panel, pinned to the right edge
+for_window [title="rightpanel"] floating enable, border pixel 0, resize set 306 px 774 px, move position 974 0
+bindsym $mod+n exec --no-startup-id ~/.config/i3/rightpanel.sh
 
 exec --no-startup-id xcape -e 'Super_L=Alt_L|F1' -t 150
 bindsym Mod1+F1 exec --no-startup-id rofi -show drun

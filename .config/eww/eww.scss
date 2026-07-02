@@ -1,0 +1,171 @@
+* {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+}
+
+.panel-bg {
+    background-color: #1a1d15;
+    color: #d6d0bd;
+    border-left: 1px solid #3c4032;
+}
+
+.panel {
+    margin: 8px;
+}
+
+.topbar {
+    margin-bottom: 8px;
+}
+
+.arch-logo {
+    font-family: "Iosevka Nerd Font", monospace;
+    color: #9aac6f;
+    font-size: 18px;
+    margin-left: 4px;
+}
+
+.uptime {
+    color: #8f8875;
+    font-size: 12px;
+}
+
+.topbar-dot {
+    color: #4a4d3d;
+    font-size: 10px;
+}
+
+eventbox {
+    background-color: transparent;
+    background-image: none;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    padding: 0;
+    font-size: 16px;
+    color: #b8ad94;
+}
+
+.clear-inner {
+    font-size: 15px;
+}
+
+.circlebtn-inner {
+    background-color: #232619;
+    border: 1px solid #3c4032;
+    border-radius: 9999px;
+    outline: none;
+    box-shadow: none;
+}
+
+.circlebtn-inner label {
+    padding: 0;
+    margin: 0;
+}
+
+eventbox:hover .circlebtn-inner {
+    background-color: #2f3327;
+    color: #d6d0bd;
+    border-color: #5c6b46;
+}
+
+eventbox:hover .circlebtn-inner.circlebtn-danger {
+    background-color: #3a241d;
+    color: #c8b9a0;
+    border-color: #8f5d4f;
+}
+
+.pills {
+    padding: 2px 0;
+}
+
+.pill {
+    border-radius: 9999px;
+    border: 1px solid #33362a;
+    background-color: #20231a;
+    min-width: 110px;
+}
+
+.pill-content {
+    margin: 8px 18px;
+}
+
+.pill:hover {
+    border-color: #4a4d3d;
+}
+
+.pill-on {
+    border-color: #5c6b46;
+}
+
+.pill-off {
+    opacity: 0.75;
+}
+
+.pill-dot {
+    font-size: 9px;
+}
+
+.dot-on {
+    color: #9aac6f;
+}
+
+.dot-off {
+    color: #6b6656;
+}
+
+.pill-name {
+    color: #d6d0bd;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.pill-status {
+    color: #8f8875;
+    font-size: 9px;
+    margin-left: 15px;
+}
+
+.section {
+    margin: 4px;
+}
+
+.history {
+    background-color: transparent;
+}
+
+.section-title {
+    color: #6b6656;
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+}
+
+.clear-btn {
+    background-color: transparent;
+    border: none;
+    color: #6b6656;
+    font-size: 9px;
+    padding: 0;
+}
+
+.clear-btn:hover {
+    color: #b57766;
+}
+
+.history-label {
+    color: #a4a08c;
+    font-size: 10.5px;
+}
+
+.notes {
+    background-color: transparent;
+    margin: 2px 4px;
+    min-height: 200px;
+}
+
+.notes-slot {
+    background-color: #14160f;
+    border: 1px solid #292c21;
+    border-radius: 4px;
+}
