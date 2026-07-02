@@ -1,7 +1,6 @@
 dbus-broker.service
 gnome-keyring-daemon.service
 gnome-keyring-daemon.socket
-keepalive-hifi.timer
 nextcloud-inotifyscan.service
 openrazer-daemon.service
 p11-kit-server.socket
