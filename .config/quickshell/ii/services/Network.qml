@@ -34,6 +34,8 @@ Singleton {
 
     property string networkName: ""
     property int networkStrength
+    property bool vpnActive: false
+    property string vpnName: ""
     property string materialSymbol: root.ethernet
         ? "lan"
         : (root.wifiEnabled && root.wifiStatus === "connected")
@@ -252,6 +254,32 @@ Singleton {
         stdout: StdioCollector {
             onStreamFinished: {
                 root.wifiEnabled = text.trim() === "enabled";
+            }
+        }
+    }
+
+    Timer {
+        id: vpnPollTimer
+        interval: 5000
+        running: true
+        repeat: true
+        triggeredOnStart: true
+        onTriggered: {
+            vpnStateProc.running = false;
+            vpnStateProc.running = true;
+        }
+    }
+
+    Process {
+        id: vpnStateProc
+        command: ["bash", "-c",
+            "nmcli -t -f NAME,TYPE,STATE con show --active | awk -F: '$2==\"vpn\" || $2==\"wireguard\"{print $1; found=1} END{if(!found) print \"\"}'"
+        ]
+        stdout: SplitParser {
+            onRead: data => {
+                const name = data.trim();
+                root.vpnName = name;
+                root.vpnActive = name !== "";
             }
         }
     }

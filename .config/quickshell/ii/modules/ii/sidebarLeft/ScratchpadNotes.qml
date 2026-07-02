@@ -31,10 +31,7 @@ FocusScope {
             StyledTextArea { // Direct child of ScrollView for proper scrolling
                 id: textInput
                 focus: true
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
+                width: editorScrollView.availableWidth
                 wrapMode: TextEdit.Wrap
                 placeholderText: "Write something here..."
                 selectByMouse: true

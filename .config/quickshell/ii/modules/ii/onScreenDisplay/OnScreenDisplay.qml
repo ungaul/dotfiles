@@ -33,6 +33,10 @@ Scope {
             id: "keyboard",
             sourceUrl: "indicators/KeyboardChatteringIndicator.qml"
         },
+        {
+            id: "audioOutput",
+            sourceUrl: "indicators/AudioOutputIndicator.qml"
+        },
     ]
 
     function triggerOsd() {
@@ -92,6 +96,18 @@ Scope {
         function onSinkProtectionTriggered(reason) {
             root.protectionMessage = reason;
             root.currentIndicator = "volume";
+            root.triggerOsd();
+        }
+        function onSinkChanged() {
+            if (!Audio.ready)
+                return;
+            root.protectionMessage = "";
+            root.currentIndicator = "audioOutput";
+            root.triggerOsd();
+        }
+        function onProfileCycled() {
+            root.protectionMessage = "";
+            root.currentIndicator = "audioOutput";
             root.triggerOsd();
         }
     }

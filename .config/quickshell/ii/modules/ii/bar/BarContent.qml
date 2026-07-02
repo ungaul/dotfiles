@@ -356,9 +356,34 @@ Item { // Bar content region
                         }
                     }
                     MaterialSymbol {
+                        id: networkIcon
                         text: Network.materialSymbol
                         iconSize: Appearance.font.pixelSize.larger
                         color: rightSidebarButton.colText
+
+                        Rectangle {
+                            visible: Network.vpnActive
+                            anchors {
+                                right: parent.right
+                                top: parent.top
+                                rightMargin: -1
+                                topMargin: -1
+                            }
+                            radius: Appearance.rounding.full
+                            color: Appearance.colors.colOnLayer0
+                            z: 1
+
+                            implicitWidth: vpnLockIcon.implicitWidth + 2
+                            implicitHeight: vpnLockIcon.implicitHeight + 2
+
+                            MaterialSymbol {
+                                id: vpnLockIcon
+                                anchors.centerIn: parent
+                                text: "lock"
+                                iconSize: Appearance.font.pixelSize.smallest
+                                color: Appearance.colors.colLayer0
+                            }
+                        }
                     }
                     MaterialSymbol {
                         Layout.leftMargin: indicatorsRowLayout.realSpacing

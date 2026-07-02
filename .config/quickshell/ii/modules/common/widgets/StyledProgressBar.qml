@@ -80,18 +80,10 @@ ProgressBar {
         
         Rectangle { // Right remaining part fill
             anchors.right: parent.right
-            width: (1 - root.visualPosition) * parent.width - valueBarGap
+            width: (1 - root.visualPosition) * parent.width
             height: parent.height
             radius: height / 2
             color: root.trackColor
-        }
-        
-        Rectangle { // Stop point
-            anchors.right: parent.right
-            width: valueBarGap
-            height: valueBarGap
-            radius: height / 2
-            color: root.highlightColor
         }
     }
 }

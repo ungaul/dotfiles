@@ -12,6 +12,7 @@ hl.bind("CTRL + SUPER + Escape", hl.dsp.exec_cmd("~/.config/hypr/hyprland/script
 hl.bind("SUPER + Space", hl.dsp.exec_cmd("switch=$(hyprctl devices -j | jq -r '.keyboards[] | .active_keymap' | uniq -c | [ $(wc -l) -eq 1 ] && echo 'next' || echo '0'); for device in $(hyprctl devices -j | jq -r '.keyboards[] | .name'); do hyprctl switchxkblayout $device $switch; done"), { description = "Switch Keyboard Layouts" })
 hl.bind("SUPER + P", hl.dsp.exec_cmd("bash -c 'F=/tmp/screen_dimmed; H=\"HYPRLAND_INSTANCE_SIGNATURE=$(ls /run/user/1000/hypr/ | tail -1) XDG_RUNTIME_DIR=/run/user/1000 hyprctl\"; [ -f \"$F\" ] && eval \"$H hyprsunset gamma 100\" && rm \"$F\" || (eval \"$H hyprsunset gamma 0\" && touch \"$F\")'"))
 hl.bind("CTRL + SUPER + K", hl.dsp.exec_cmd("qs -c ii ipc call osdKeyboard toggle"), { description = "Toggle keyboard chattering fix" })
+hl.bind("CTRL + SUPER + A", hl.dsp.exec_cmd(qsIpcCall .. " audio cycleProfile"), { description = "Audio: Cycle output profile (analog/HDMI)", locked = true })
 hl.bind("SUPER + Semicolon", hl.dsp.global("quickshell:overviewEmojiToggle"))
 hl.bind("SUPER + H", hl.dsp.global("quickshell:cheatsheetToggle"), { description = "Shell: Toggle cheatsheet" })
 

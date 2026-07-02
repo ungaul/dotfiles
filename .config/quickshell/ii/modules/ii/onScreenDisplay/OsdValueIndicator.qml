@@ -11,6 +11,7 @@ Item {
     required property string name
     property bool rotateIcon: false
     property bool scaleIcon: false
+    property bool isToggle: false // hide the percentage number for boolean on/off indicators
     property alias from: valueProgressBar.from
     property alias to: valueProgressBar.to
 
@@ -88,13 +89,14 @@ Item {
                     }
 
                     StyledText {
+                        visible: !root.isToggle
                         color: Appearance.colors.colOnLayer0
                         font.pixelSize: Appearance.font.pixelSize.small
                         Layout.fillWidth: false
                         text: Math.round(root.value * 100)
                     }
                 }
-                
+
                 StyledProgressBar {
                     id: valueProgressBar
                     Layout.fillWidth: true

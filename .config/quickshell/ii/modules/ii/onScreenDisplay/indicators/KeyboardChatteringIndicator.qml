@@ -8,6 +8,7 @@ OsdValueIndicator {
     value: GlobalStates.keyboardChatteringActive ? 1.0 : 0.0
     icon: GlobalStates.keyboardChatteringActive ? "keyboard" : "keyboard_off"
     name: GlobalStates.keyboardChatteringActive ? "KB fix ON" : "KB fix OFF"
+    isToggle: true
     from: 0
     to: 1
 

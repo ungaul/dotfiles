@@ -69,7 +69,7 @@ Item {
                 MaterialSymbol {
                     anchors.centerIn: parent
                     fill: 1
-                    text: activePlayer?.isPlaying ? "pause" : "music_note"
+                    text: "music_note"
                     iconSize: Appearance.font.pixelSize.normal
                     color: Appearance.m3colors.m3onSecondaryContainer
                 }

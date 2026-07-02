@@ -25,6 +25,11 @@ Scope {
             sourceUrl: "BrightnessOSD.qml",
             globalStateValue: "osdBrightnessOpen"
         },
+        {
+            id: "audioOutput",
+            sourceUrl: "AudioOutputOSD.qml",
+            globalStateValue: "osdAudioOutputOpen"
+        },
     ]
 
     function triggerBrightnessOsd() {
@@ -35,6 +40,11 @@ Scope {
     function triggerVolumeOSD() {
         root.currentIndicator = "volume";
         GlobalStates.osdVolumeOpen = true;
+    }
+
+    function triggerAudioOutputOsd() {
+        root.currentIndicator = "audioOutput";
+        GlobalStates.osdAudioOutputOpen = true;
     }
 
     // Listen to brightness changes
@@ -58,6 +68,18 @@ Scope {
         }
     }
 
+    // Listen to output device changes
+    Connections {
+        target: Audio
+        function onSinkChanged() {
+            if (Audio.ready)
+                root.triggerAudioOutputOsd();
+        }
+        function onProfileCycled() {
+            root.triggerAudioOutputOsd();
+        }
+    }
+
     // Open when global state changes
     Connections {
         target: GlobalStates
@@ -68,6 +90,10 @@ Scope {
         }
         function onOsdVolumeOpenChanged() {
             if (GlobalStates.osdVolumeOpen)
+                panelLoader.active = true;
+        }
+        function onOsdAudioOutputOpenChanged() {
+            if (GlobalStates.osdAudioOutputOpen)
                 panelLoader.active = true;
         }
     }
