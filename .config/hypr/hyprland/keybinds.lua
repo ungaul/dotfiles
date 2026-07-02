@@ -28,6 +28,7 @@ hl.bind("SUPER + Tab", hl.dsp.global("quickshell:overviewWorkspacesToggle"), { d
 hl.bind("SUPER + V", hl.dsp.global("quickshell:overviewClipboardToggle"))
 hl.bind("SUPER + Period", hl.dsp.global("quickshell:overviewEmojiToggle"))
 hl.bind("SUPER + N", hl.dsp.global("quickshell:sidebarRightToggle"),{ description = "Shell: Toggle right sidebar" })
+hl.bind("SUPER + B", hl.dsp.global("quickshell:sidebarLeftToggle"),{ description = "Shell: Toggle left sidebar" })
 hl.bind("SUPER + Slash", hl.dsp.global("quickshell:cheatsheetToggle"),{ description = "Shell: Toggle cheatsheet" })
 hl.bind("SUPER + K", hl.dsp.global("quickshell:oskToggle"),{ description = "Shell: Toggle on-screen keyboard" })
 hl.bind("SUPER + M", hl.dsp.global("quickshell:mediaControlsToggle"),{ description = "Shell: Toggle media controls" })

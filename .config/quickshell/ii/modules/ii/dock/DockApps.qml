@@ -109,6 +109,7 @@ Item {
             Behavior on scale { NumberAnimation { duration: 150 } }
 
             onContextMenuRequested: {
+                previewPopup.show = false
                 root.contextMenuApp = appButton.modelData
                 root.contextMenuCenterX = root.popupCenterXForButton(appButton)
                 contextMenuPopup.show = true
@@ -168,7 +169,7 @@ Item {
     PopupWindow {
         id: previewPopup
         property var appTopLevel: root.lastHoveredButton?.appToplevel
-        property bool shouldShow: (popupMouseArea.containsMouse || root.buttonHovered) && appTopLevel && appTopLevel.toplevels && appTopLevel.toplevels.length > 0
+        property bool shouldShow: (popupMouseArea.containsMouse || root.buttonHovered) && appTopLevel && appTopLevel.toplevels && appTopLevel.toplevels.length > 0 && !contextMenuPopup.show
         property bool show: false
         property real cachedCenterX: 0
 

@@ -92,7 +92,21 @@ Item { // Bar content region
                 Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                 Layout.leftMargin: Appearance.rounding.screenRounding
 
-                RippleButton { // Arch icon — switches panel family
+                LeftSidebarButton { // Opens the left sidebar (Claude Code / Translator)
+                    id: leftSidebarButton
+                    Layout.alignment: Qt.AlignVCenter
+                }
+
+                Rectangle { // Separator dot
+                    visible: leftSidebarButton.visible
+                    Layout.alignment: Qt.AlignVCenter
+                    implicitWidth: 4
+                    implicitHeight: 4
+                    radius: Appearance.rounding.full
+                    color: Appearance.colors.colOutlineVariant
+                }
+
+                RippleButton { // Arch icon — opens overview
                     id: archButton
                     Layout.alignment: Qt.AlignVCenter
 
@@ -109,7 +123,7 @@ Item { // Bar content region
                     colRippleToggled: Appearance.colors.colSecondaryContainerActive
 
                     onPressed: {
-                        Config.options.panelFamily = "waffle";
+                        GlobalStates.overviewOpen = !GlobalStates.overviewOpen;
                     }
 
                     CustomIcon {

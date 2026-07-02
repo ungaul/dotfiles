@@ -467,17 +467,11 @@ Singleton {
 
             property JsonObject sidebar: JsonObject {
                 property bool keepRightSidebarLoaded: true
-                property JsonObject translator: JsonObject {
-                    property bool enable: false
-                    property int delay: 300 // Delay before sending request. Reduces (potential) rate limits and lag.
+                property JsonObject claudeCode: JsonObject {
+                    property bool enable: true
                 }
-                property JsonObject booru: JsonObject {
-                    property bool allowNsfw: false
-                    property string defaultProvider: "yandere"
-                    property int limit: 20
-                    property JsonObject zerochan: JsonObject {
-                        property string username: "[unset]"
-                    }
+                property JsonObject notes: JsonObject {
+                    property bool enable: true
                 }
                 property JsonObject cornerOpen: JsonObject {
                     property bool enable: true

@@ -9,8 +9,9 @@ RippleButton {
 
     property bool showPing: false
 
-    property bool translatorEnabled: Config.options.sidebar.translator.enable
-    visible: translatorEnabled
+    property bool claudeCodeEnabled: Config.options.sidebar.claudeCode.enable
+    property bool notesEnabled: Config.options.sidebar.notes.enable
+    visible: claudeCodeEnabled || notesEnabled
 
     property real buttonPadding: 5
     implicitWidth: distroIcon.width + buttonPadding * 2
@@ -26,10 +27,6 @@ RippleButton {
     onPressed: {
         GlobalStates.sidebarLeftOpen = !GlobalStates.sidebarLeftOpen;
     }
-
-    // Connections Ai removed
-
-    // Connections Booru removed
 
     Connections {
         target: GlobalStates

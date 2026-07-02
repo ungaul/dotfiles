@@ -1,3 +1,4 @@
+import qs
 import qs.services
 import qs.modules.common
 import qs.modules.common.widgets
@@ -12,14 +13,33 @@ Item {
     required property var scopeRoot
     property int sidebarPadding: 10
     anchors.fill: parent
-    property bool translatorEnabled: Config.options.sidebar.translator.enable
+    property bool claudeCodeEnabled: Config.options.sidebar.claudeCode.enable
+    property bool notesEnabled: Config.options.sidebar.notes.enable
     property var tabButtonList: [
-        ...(root.translatorEnabled ? [{"icon": "translate", "name": "Translator"}] : []),
+        ...(root.claudeCodeEnabled ? [{"icon": "terminal", "name": "Claude Code"}] : []),
+        ...(root.notesEnabled ? [{"icon": "edit_note", "name": "Notes"}] : []),
     ]
     property int tabCount: swipeView.count
 
     function focusActiveItem() {
         swipeView.currentItem.forceActiveFocus()
+    }
+
+    // Nothing previously called focusActiveItem(), so tab content (e.g. the
+    // embedded Claude Code terminal) never actually received keyboard focus
+    // when the sidebar was opened after startup.
+    Connections {
+        target: GlobalStates
+        function onSidebarLeftOpenChanged() {
+            if (GlobalStates.sidebarLeftOpen)
+                root.focusActiveItem();
+        }
+    }
+    Connections {
+        target: swipeView
+        function onCurrentIndexChanged() {
+            root.focusActiveItem();
+        }
     }
 
     Keys.onPressed: (event) => {
@@ -69,25 +89,26 @@ Item {
                 currentIndex: tabBar.currentIndex
 
                 clip: true
-                layer.enabled: true
-                layer.effect: OpacityMask {
-                    maskSource: Rectangle {
-                        width: swipeView.width
-                        height: swipeView.height
-                        radius: Appearance.rounding.small
-                    }
-                }
+                // layer.enabled + OpacityMask (rounded-corner mask) interferes with
+                // input delivery to embedded native-ish items like QMLTermWidget.
+                // clip: true alone still rounds the visible edges well enough.
+                layer.enabled: false
 
                 contentChildren: [
-                    ...(root.translatorEnabled ? [translator.createObject()] : []),
+                    ...(root.claudeCodeEnabled ? [claudeCode.createObject()] : []),
+                    ...(root.notesEnabled ? [notes.createObject()] : []),
                     ...(root.tabButtonList.length === 0 ? [placeholder.createObject()] : []),
                 ]
             }
         }
 
         Component {
-            id: translator
-            Item {}
+            id: claudeCode
+            ClaudeCode {}
+        }
+        Component {
+            id: notes
+            ScratchpadNotes {}
         }
         Component {
             id: placeholder

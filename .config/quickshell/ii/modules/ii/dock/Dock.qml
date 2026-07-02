@@ -52,7 +52,10 @@ Scope { // Scope
                 height: parent.height
                 anchors {
                     top: parent.top
-                    topMargin: dockRoot.reveal ? 0 : Config.options?.dock.hoverToReveal ? (dockRoot.implicitHeight - Config.options.dock.hoverRegionHeight) : (dockRoot.implicitHeight + 1)
+                    // Extra buffer accounts for cursor coordinates landing a few px short of the
+                    // true screen edge under some remote-display setups (e.g. VNC), which otherwise
+                    // leaves a dead zone right at the bottom where hover never registers.
+                    topMargin: dockRoot.reveal ? 0 : Config.options?.dock.hoverToReveal ? Math.max(0, dockRoot.implicitHeight - Config.options.dock.hoverRegionHeight - 10) : (dockRoot.implicitHeight + 1)
                     horizontalCenter: parent.horizontalCenter
                 }
                 implicitWidth: dockHoverRegion.implicitWidth + Appearance.sizes.elevationMargin * 2

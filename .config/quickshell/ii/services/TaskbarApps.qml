@@ -89,10 +89,19 @@ Singleton {
         }
 
         // Destroy entries for apps that disappeared (closed/unpinned) so they don't leak.
+        // Mutated in place rather than reassigned: `root._entryCache = nextCache` would
+        // change the property's identity and re-trigger this same `apps` binding (which
+        // reads _entryCache above), causing a binding loop. In-place mutation keeps the
+        // same object reference, so no change notification fires.
         for (const key in root._entryCache) {
-            if (!(key in nextCache)) root._entryCache[key].destroy();
+            if (!(key in nextCache)) {
+                root._entryCache[key].destroy();
+                delete root._entryCache[key];
+            }
         }
-        root._entryCache = nextCache;
+        for (const key in nextCache) {
+            root._entryCache[key] = nextCache[key];
+        }
 
         return values;
     }

@@ -184,6 +184,7 @@ python-pyciede2000
 python-pylint
 python-pywal
 qbittorrent
+qmltermwidget
 qt6-avif-image-plugin
 qt6-quicktimeline
 qt6-sensors
@@ -217,6 +218,7 @@ strace
 sudo
 sxhkd
 sysstat
+tcpdump
 terminus-font
 timidity++
 tinyxml2

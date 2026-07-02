@@ -461,15 +461,6 @@ ContentPage {
             }
         }
 
-        ConfigSwitch {
-            buttonIcon: "translate"
-            text: 'Enable translator'
-            checked: Config.options.sidebar.translator.enable
-            onCheckedChanged: {
-                Config.options.sidebar.translator.enable = checked;
-            }
-        }
-
         ContentSubsection {
             title: "Quick toggles"
             

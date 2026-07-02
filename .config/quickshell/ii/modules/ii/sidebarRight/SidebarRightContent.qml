@@ -299,6 +299,16 @@ Item {
             }
             QuickToggleButton {
                 toggled: false
+                buttonIcon: "sync_alt"
+                onClicked: {
+                    Config.options.panelFamily = "waffle";
+                }
+                StyledToolTip {
+                    text: "Switch to waffle"
+                }
+            }
+            QuickToggleButton {
+                toggled: false
                 buttonIcon: "settings"
                 onClicked: {
                     GlobalStates.sidebarRightOpen = false;
