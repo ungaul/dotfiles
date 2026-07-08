@@ -1,0 +1,11 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+PS1='[\u@\h \W]\$ '
+alias rec="sudo ffmpeg -f fbdev -framerate 60 -i /dev/fb0 -t 10 -c:v libx264 -pix_fmt yuv420p -color_range 2 -vf scale=out_range=full ~/demo.mp4"

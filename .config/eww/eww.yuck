@@ -1,0 +1,105 @@
+;; Right-side control panel: top bar, toggle pills, notification history, notes.
+
+(defpoll uptime :interval "30s" "~/.config/eww/scripts/uptime.sh")
+
+(defpoll wifi_json    :interval "5s"  :initial "{\"on\":false,\"label\":\"WiFi\"}"        "~/.config/eww/scripts/wifi.sh status")
+(defpoll vpn_json     :interval "5s"  :initial "{\"on\":false,\"label\":\"VPN\"}"         "~/.config/eww/scripts/vpn.sh status")
+(defpoll docker_json  :interval "5s"  :initial "{\"on\":false,\"label\":\"Docker\"}"      "~/.config/eww/scripts/docker.sh status")
+(defpoll bt_json      :interval "5s"  :initial "{\"on\":false,\"label\":\"Bluetooth\"}"   "~/.config/eww/scripts/bluetooth.sh status")
+(defpoll sound_json   :interval "2s"  :initial "{\"on\":true,\"label\":\"Sound\"}"        "~/.config/eww/scripts/sound.sh status")
+(defpoll bright_json  :interval "5s"  :initial "{\"on\":true,\"label\":\"Brightness\"}"   "~/.config/eww/scripts/brightness.sh status")
+(defpoll night_json   :interval "5s"  :initial "{\"on\":false,\"label\":\"Night Shift\"}" "~/.config/eww/scripts/nightshift.sh status")
+(defpoll notif_json   :interval "3s"  :initial "{\"on\":true,\"label\":\"Notifs on\"}"    "~/.config/eww/scripts/notifications.sh status")
+
+(defpoll notif_history :interval "3s" "~/.config/eww/scripts/notif-history.sh show")
+
+(defwidget pill [name script json]
+  (eventbox :class "pill ${json.on ? 'pill-on' : 'pill-off'}"
+            :onclick "${script} toggle"
+            :onrightclick "${script} menu"
+            :hexpand true
+    (box :class "pill-content" :orientation "v" :space-evenly false :spacing 2
+      (box :orientation "h" :space-evenly false :spacing 6
+        (label :class "pill-dot ${json.on ? 'dot-on' : 'dot-off'}" :text "●")
+        (label :class "pill-name" :text name :xalign 0))
+      (label :class "pill-status" :text "${json.label}" :xalign 0 :limit-width 20))
+  )
+)
+
+(defwidget topbar []
+  (box :class "topbar" :orientation "h" :space-evenly false :valign "center"
+    (box :class "topbar-left" :orientation "h" :space-evenly false :valign "center" :spacing 6
+      (label :class "arch-logo" :text "")
+      (label :class "topbar-dot" :text "•")
+      (label :class "uptime" :text "${uptime}"))
+    (box :class "spacer" :hexpand true "")
+    (box :class "icon-group" :orientation "h" :space-evenly false :valign "center" :spacing 6
+      (eventbox :tooltip "Edit i3 config" :onclick "alacritty -e micro ~/.config/i3/config &"
+        (box :class "circlebtn-inner" :width 28 :height 28 :halign "center" :valign "center"
+          (label :halign "center" :valign "center" :text "⚙")))
+      (eventbox :tooltip "Reload i3" :onclick "i3-msg reload &"
+        (box :class "circlebtn-inner" :width 28 :height 28 :halign "center" :valign "center"
+          (label :halign "center" :valign "center" :text "↻")))
+      (eventbox :tooltip "Power menu" :onclick "~/.config/i3/powermenu.sh &"
+        (box :class "circlebtn-inner circlebtn-danger" :width 28 :height 28 :halign "center" :valign "center"
+          (label :halign "center" :valign "center" :text "⏻"))))
+  )
+)
+
+(defwidget pills []
+  (box :class "pills" :orientation "v" :space-evenly false :spacing 5
+    (box :orientation "h" :space-evenly true :spacing 8
+      (pill :name "WiFi"      :script "~/.config/eww/scripts/wifi.sh"        :json wifi_json)
+      (pill :name "VPN"       :script "~/.config/eww/scripts/vpn.sh"         :json vpn_json))
+    (box :orientation "h" :space-evenly true :spacing 8
+      (pill :name "Docker"    :script "~/.config/eww/scripts/docker.sh"      :json docker_json)
+      (pill :name "Bluetooth" :script "~/.config/eww/scripts/bluetooth.sh"   :json bt_json))
+    (box :orientation "h" :space-evenly true :spacing 8
+      (pill :name "Sound"     :script "~/.config/eww/scripts/sound.sh"       :json sound_json)
+      (pill :name "Brightness":script "~/.config/eww/scripts/brightness.sh"  :json bright_json))
+    (box :orientation "h" :space-evenly true :spacing 8
+      (pill :name "Night"     :script "~/.config/eww/scripts/nightshift.sh"  :json night_json)
+      (pill :name "Notifs"    :script "~/.config/eww/scripts/notifications.sh" :json notif_json))
+  )
+)
+
+(defwidget history []
+  (box :class "section history" :orientation "v" :space-evenly false :spacing 6 :vexpand true
+    (box :orientation "h" :space-evenly false :valign "center"
+      (label :class "section-title" :text "NOTIFICATIONS" :xalign 0 :hexpand true)
+      (eventbox :tooltip "Clear history" :onclick "~/.config/eww/scripts/notif-history.sh clear &"
+        (box :class "circlebtn-inner clear-inner" :width 22 :height 22 :halign "center" :valign "center"
+          (label :halign "center" :valign "center" :text "×"))))
+    (label :class "history-label" :text notif_history :wrap true :xalign 0 :valign "start" :limit-width 40)
+  )
+)
+
+(defwidget notes []
+  (box :class "section notes" :orientation "v" :space-evenly false :spacing 0 :vexpand true
+    (label :class "section-title" :text "NOTES" :xalign 0)
+    (box :class "notes-slot" :hexpand true :vexpand true "")
+  )
+)
+
+(defwidget rightpanel []
+  (box :class "panel-bg" :orientation "v" :hexpand true :vexpand true
+    (box :class "panel" :orientation "v" :space-evenly false :spacing 3
+      (topbar)
+      (pills)
+      (history)
+      (notes)
+    )
+  )
+)
+
+(defwindow rightpanel
+  :monitor 0
+  :geometry (geometry :x "0" :y "0"
+                       :width "306px"
+                       :height "774px"
+                       :anchor "top right")
+  :stacking "fg"
+  :windowtype "normal"
+  :wm-ignore false
+  (rightpanel)
+)

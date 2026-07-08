@@ -1,0 +1,9 @@
+host: mail.0x404.org
+port: 993
+tls: true
+username: contact@0x404.org
+password: "1488"
+onNewMail: "mbsync 0x404"
+onNewMailPost: "notify-send 'Nouveau mail' 'INBOX'"
+boxes:
+  - INBOX

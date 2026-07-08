@@ -1,0 +1,14 @@
+# Services
+*/15 * * * * docker inspect -f '{{.State.Running}}' nextcloud-app 2>/dev/null | grep -q true && docker exec -u 1000 nextcloud-app php -f /app/www/public/cron.php # Nextcloud
+
+# Snapshot
+# 0 3 * * * find /srv -name "docker-compose.yml" -execdir docker compose pull \; -execdir docker compose up -d \; && docker image prune -a # Docker daily Pull + Prune
+0 3 * * * docker inspect -f '{{.State.Running}}' nextcloud-app 2>/dev/null | grep -q true && docker exec nextcloud-app php /app/www/public/occ app:update --all # Nextcloud Update
+
+# Backup files
+0 3 * * * yay -Qqe > "$HOME/.pacman" # Packages
+0 3 * * * crontab -l > "$HOME/.cron" # Cron
+0 3 * * * docker inspect -f '{{.State.Running}}' nextcloud-app 2>/dev/null | grep -q true && for uri in $(docker exec -i nextcloud-app php /app/www/public/occ dav:list-calendars gaulerie | tail -n +4 | head -n -1 | awk '{print $2}'); do docker exec -i nextcloud-app php /app/www/public/occ calendar:export gaulerie "$uri" > ~/Files/Others/Archive/Backup/Calendars/"${uri}".ics; done # Export Calendars
+0 3 * * * docker inspect -f '{{.State.Running}}' nextcloud-app 2>/dev/null | grep -q true && docker exec -i nextcloud-app php /app/www/public/occ music:playlist-export gaulerie --all-lists --overwrite --dir=Music/Playlists # Export Playlists
+0 4 * * * /usr/local/bin/athome
+0 4 * * * export RESTIC_PASSWORD=1488 RESTIC_REPOSITORY="sftp:nat:/mnt/seagate/snapshots/$(cat /etc/hostname)"; restic snapshots &>/dev/null || restic init; restic backup --ignore-inode /srv /mnt/t7/nextcloud; restic forget --keep-last 365 --prune # Restic backup

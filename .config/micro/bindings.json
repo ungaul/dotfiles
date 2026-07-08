@@ -1,0 +1,9 @@
+{
+    "Ctrl-v": "Paste",
+    "Ctrl-x": "Quit",
+    "Ctrl-c": "Copy",
+    "Ctrl-k": "Cut|CutLine",
+    "Ctrl-q": "None",
+    "Ctrl-t": "CommandMode",
+    "Ctrl-e": "command:tree"
+}

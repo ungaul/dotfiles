@@ -1,0 +1,13 @@
+[Unit]
+Description=hyprmoncfg monitor daemon for Hyprland
+BindsTo=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=%h/go/bin/hyprmoncfgd
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=graphical-session.target

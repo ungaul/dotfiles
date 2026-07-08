@@ -1,0 +1,20 @@
+[Unit]
+Description=Nextcloud inotify scan daemon for gaulerie
+[Service]
+Type=simple
+Environment=PYTHONIOENCODING=utf-8
+ExecStart=/bin/sh -c "\
+printf '%%s\\n' \
+  '[DEFAULT]' \
+  'interval = 1' \
+  '' \
+  '[Instance1]' \
+  'occ = /app/www/public/occ' \
+  'user = gaulerie' \
+  'docker = abc:nextcloud-app' \
+  'external_storage = yes' \
+  'php = php' \
+| exec /srv/nextcloud/nextcloud-inotifyscan --config /dev/stdin"
+Restart=on-failure
+[Install]
+WantedBy=default.target
