@@ -6,8 +6,4 @@ My personal dotfiles. Running a personal fork of [illogical-impulse](https://git
 |----------|-----|
 | ![hyprland](assets/hyprland.png) | ![i3](assets/i3.png) |
 
-Files are mirrored at their `$HOME`-relative paths so they're easy to browse. Most config is personal and not username-dynamic. Feel free to use anything as inspiration.
-
-## Install
-
-Use [ungaul/athome](https://github.com/ungaul/athome) to install them if needed.
+I am using [yadm](https://github.com/yadm-dev/yadm) for syncing.
