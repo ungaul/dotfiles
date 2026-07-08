@@ -1,0 +1,61 @@
+# ~/.sync -- paths tracked by yadm
+#
+# Format:
+#   - one path per line, relative to $HOME (or absolute with leading /)
+#   - "#" starts a comment, blank lines ignored
+#   - [blacklist] section: paths never added, added to yadm's exclude
+
+# shell
+.config/fish
+.config/bash
+.fehbg
+.Xresources
+.xinitrc
+.sync
+
+# terminals
+.config/kitty
+.config/ghostty
+
+# editor
+.config/micro
+
+# ssh
+.ssh/config
+
+# personal scripts / cron / pacman hooks
+.pacman
+.cron
+
+# desktop / wm
+.config/hypr
+.config/i3
+.config/polybar
+.config/dunst
+.config/quickshell
+.config/fuzzel
+.config/xdg-desktop-portal/hyprland-portals.conf
+.config/shairport-sync.conf
+
+# theming
+.local/share/icons/macOS-hypr
+.config/matugen
+.config/eww
+.config/kde-material-you-colors
+.local/state/quickshell/user/generated/terminal/kitty-theme.conf
+.local/state/quickshell/user/generated/wallpaper
+.local/state/quickshell/user/generated/color.txt
+.local/state/quickshell/user/generated/colors.json
+.local/state/quickshell/user/generated/material_colors.scss
+
+# misc app config
+.config/wayvnc/config
+.config/systemd/user
+.config/imapnotify/0x404.yaml
+.config/net.imput.helium/Default/Bookmarks
+.config/playerctl
+.local/share/applications
+
+[blacklist]
+.config/micro/buffers/
+.config/systemd/user/.enabled-units
