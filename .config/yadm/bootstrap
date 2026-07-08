@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# restore crontab
+if [ -f "$HOME/.cron" ]; then
+    crontab "$HOME/.cron"
+    echo "crontab restored from ~/.cron"
+fi
+
+# restore explicitly installed packages
+if [ -f "$HOME/.pacman" ]; then
+    yay -S --needed - < "$HOME/.pacman"
+fi

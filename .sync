@@ -26,6 +26,7 @@
 # personal scripts / cron / pacman hooks
 .pacman
 .cron
+.config/yadm/bootstrap
 
 # desktop / wm
 .config/hypr
