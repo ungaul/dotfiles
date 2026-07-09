@@ -281,6 +281,7 @@ xorg-xsetroot
 xorg-xwininfo
 xsettingsd
 xss-lock
+yadm
 yamllint
 yay
 ydotool
