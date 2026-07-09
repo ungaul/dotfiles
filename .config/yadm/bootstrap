@@ -26,7 +26,7 @@ fi
 
 echo "==> [3/3] install missing packages from ~/.pacman"
 if [ -f "$HOME/.pacman" ]; then
-    yay -S --needed --noconfirm --answerclean None --answerdiff None --answeredit None --answerupgrade None - < "$HOME/.pacman"
+    yes "" | xargs -a "$HOME/.pacman" yay -S --needed --noconfirm --answerclean None --answerdiff None --answeredit None --answerupgrade None
     echo "    done"
 else
     echo "    ~/.pacman not found, skipping"
