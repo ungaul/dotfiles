@@ -1,6 +1,20 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# allow yay/pacman to run without a password prompt (needed for cron/unattended runs)
+SUDOERS_FILE="/etc/sudoers.d/yay-$USER"
+if [ ! -f "$SUDOERS_FILE" ]; then
+    TMP_SUDOERS="$(mktemp)"
+    echo "$USER ALL=(ALL) NOPASSWD: /usr/bin/pacman" > "$TMP_SUDOERS"
+    if sudo visudo -cf "$TMP_SUDOERS" >/dev/null 2>&1; then
+        sudo install -m 0440 -o root -g root "$TMP_SUDOERS" "$SUDOERS_FILE"
+        echo "sudoers.d rule installed for $USER (passwordless pacman)"
+    else
+        echo "sudoers syntax check failed, skipping install" >&2
+    fi
+    rm -f "$TMP_SUDOERS"
+fi
+
 # restore crontab
 if [ -f "$HOME/.cron" ]; then
     crontab "$HOME/.cron"
