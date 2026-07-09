@@ -27,6 +27,7 @@
 .pacman
 .cron
 .config/yadm/bootstrap
+.config/yay/config.json
 
 # desktop / wm
 .config/hypr
