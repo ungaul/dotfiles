@@ -1,27 +1,35 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -uo pipefail
 
-# allow yay/pacman to run without a password prompt (needed for cron/unattended runs)
+echo "==> [1/3] sudoers.d for passwordless pacman"
 SUDOERS_FILE="/etc/sudoers.d/yay-$USER"
-if [ ! -f "$SUDOERS_FILE" ]; then
+if [ -f "$SUDOERS_FILE" ]; then
+    echo "    already present at $SUDOERS_FILE, skipping"
+else
     TMP_SUDOERS="$(mktemp)"
     echo "$USER ALL=(ALL) NOPASSWD: /usr/bin/pacman" > "$TMP_SUDOERS"
-    if sudo visudo -cf "$TMP_SUDOERS" >/dev/null 2>&1; then
+    if sudo visudo -cf "$TMP_SUDOERS"; then
         sudo install -m 0440 -o root -g root "$TMP_SUDOERS" "$SUDOERS_FILE"
-        echo "sudoers.d rule installed for $USER (passwordless pacman)"
+        echo "    installed $SUDOERS_FILE"
     else
-        echo "sudoers syntax check failed, skipping install" >&2
+        echo "    visudo syntax check FAILED, not installing" >&2
     fi
     rm -f "$TMP_SUDOERS"
 fi
 
-# restore crontab
+echo "==> [2/3] restore crontab from ~/.cron"
 if [ -f "$HOME/.cron" ]; then
-    crontab "$HOME/.cron"
-    echo "crontab restored from ~/.cron"
+    crontab "$HOME/.cron" && echo "    crontab restored"
+else
+    echo "    ~/.cron not found, skipping"
 fi
 
-# restore explicitly installed packages
+echo "==> [3/3] install missing packages from ~/.pacman"
 if [ -f "$HOME/.pacman" ]; then
     yay -S --needed --noconfirm --answerclean None --answerdiff None --answeredit None --answerupgrade None - < "$HOME/.pacman"
+    echo "    done"
+else
+    echo "    ~/.pacman not found, skipping"
 fi
+
+echo "==> bootstrap finished"
