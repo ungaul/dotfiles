@@ -9,5 +9,5 @@ fi
 
 # restore explicitly installed packages
 if [ -f "$HOME/.pacman" ]; then
-    yay -S --needed --noconfirm --nocleanmenu --nodiffmenu --noeditmenu --noupgrademenu --nouseask - < "$HOME/.pacman"
+    yay -S --needed --noconfirm --answerclean None --answerdiff None --answeredit None --answerupgrade None - < "$HOME/.pacman"
 fi
