@@ -19,6 +19,7 @@ exec --no-startup-id localsend --hidden
 exec --no-startup-id alttab -bg "#1a1d15" -fg "#d6d0bd" -frame "#c9b98f" -inact "#2f3327" -t 150x100 -d 1
 # exec --no-startup-id discord --start-minimized
 exec_always --no-startup-id ~/.config/polybar/launch.sh
+exec --no-startup-id nm-applet
 
 font pango:monospace 10
 floating_modifier $mod
