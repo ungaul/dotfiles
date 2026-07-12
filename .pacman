@@ -34,7 +34,6 @@ cmatrix-git
 cronie
 darkly-bin
 davfs2
-dbus-broker
 dcraw
 ddcutil
 dex
@@ -61,6 +60,7 @@ feh
 ffmpegthumbnailer
 fish
 flatpak
+fuse2
 fzf
 ghostty
 gifsicle
@@ -112,15 +112,12 @@ kitty
 ksnip
 libliftoff
 libnotify
-libpulse
 libqalculate
-libsecret
 libva-intel-driver
 libva-utils
 linux
 linux-firmware
 linux-headers
-lm_sensors
 localsend-bin
 loupe
 lxsession
@@ -133,7 +130,6 @@ mpc
 mpd-mpris
 mtpfs
 nano
-nautilus
 nautilus-open-any-terminal
 ncmpcpp
 network-manager-applet
@@ -149,7 +145,6 @@ nvme-cli
 nwg-displays
 obsidian
 onlyoffice-bin
-openrazer-daemon
 openrgb
 openssh
 os-prober
@@ -163,7 +158,6 @@ perl-image-exiftool
 pev-git
 picard
 picom
-pipewire
 pipewire-alsa
 pipewire-jack
 pipewire-pulse
@@ -190,6 +184,7 @@ python-pylint
 python-pywal
 qbittorrent
 qmltermwidget
+qrencode
 qt6-avif-image-plugin
 qt6-quicktimeline
 qt6-sensors
@@ -198,7 +193,6 @@ raw-thumbnailer
 razer-cli
 rclone
 restic
-rewaita
 rofi
 rofi-greenclip
 rose-pine-hyprcursor
